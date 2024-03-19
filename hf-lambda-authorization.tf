@@ -14,7 +14,6 @@ resource "aws_lambda_function" "hf_lambda" {
   role = "{{LAMBDA_EXEC_PERM}}"
 }
 
-// Definição da role (permissões) para a função Lambda
 resource "aws_iam_role" "lambda_exec_role" {
   name = "lambda-exec-role-authorization"
   assume_role_policy = jsonencode({
@@ -35,7 +34,6 @@ resource "aws_iam_role" "lambda_exec_role" {
   })
 }
 
-# Permissões para escrever logs no CloudWatch
  resource "aws_iam_policy" "lambda_logs_policy" {
    name = "lambda-logs-authorization-policy"
    description = "Policy for writing Lambda logs to CloudWatch"
@@ -49,13 +47,8 @@ resource "aws_iam_role" "lambda_exec_role" {
            "logs:CreateLogStream",
            "logs:PutLogEvents"
          ],
-         Resource = "arn:aws:logs:*:*:*"
+         Resource = "*"
        }
      ]
    })
- }
-
- resource "aws_iam_role_policy_attachment" "lambda_logs_policy_attachment" {
-   role       = aws_iam_role.lambda_exec_role.name
-   policy_arn = aws_iam_policy.lambda_logs_policy.arn
- }
+ } 
