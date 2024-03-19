@@ -14,22 +14,24 @@ resource "aws_lambda_function" "hf_lambda" {
   role = "{{LAMBDA_EXEC_PERM}}"
 }
 
-resource "aws_iam_role" "lambda_exec_role" {
-  name = "lambda-exec-role-authorization"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect    = "Allow",
-        Principal = {
-          Service = "lambda.amazonaws.com"
-        },
-        Action   = [
-            "sts:AssumeRole",
-            "lambda:*"
-        ]
-        Resource = "arn:aws:lambda:*:*:*"      
-       }
-    ]
-  })
-}
+ #resource "aws_iam_role" "lambda_exec_role" {
+  #name = "lambda-exec-role-authorization"
+  #assume_role_policy = jsonencode({
+    #Version = "2012-10-17",
+    #Statement = [
+      #{
+        #Effect    = "Allow",
+        #Principal = {
+          #Service = "lambda.amazonaws.com"
+        #},
+        #Action   = [
+            #"sts:AssumeRole",
+            #"lambda:CreateFunction",
+            #"lambda:UpdateFunctionCode",
+            #"lambda:InvokeFunction"
+        #]
+        #Resource = "arn:aws:lambda:*:*:*"      
+       #}
+    #]
+  #})
+#}
