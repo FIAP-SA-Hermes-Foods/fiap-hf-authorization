@@ -26,5 +26,5 @@ func main() {
 	)
 
 	handler := web.NewHandler(jwtCall)
-	lambda.Start(handler)
+	lambda.Start(handler.Authorization)
 }
